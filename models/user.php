@@ -67,21 +67,43 @@ class User{
         
     }
 
+    //read by id
+    public function ReadById($id){
+        try {
+            $sql = "SELECT * FROM {$this->table} WHERE user_id = :id";
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->bindParam(":id", $id);
+
+            $stmt->execute();
+            return $stmt;
+
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $this->conn;
+        
+        } catch (Exception $e) {
+            echo("error". $e->getMessage());
+        }
+    }
+
 
     //update
     public function Update($id, $username, $password, $user_nama, $user_status){
         $sql = "UPDATE {$this->table} SET   username = :username,
                                             password = :password,
                                             user_nama = :user_nama,
-                                            user_status = :user_status";
+                                            user_status = :user_status  WHERE user_id = :id";
         $stmt = $this->conn->prepare($sql);
 
+
+        $stmt->bindParam(':id', $id);
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':password', $password);
         $stmt->bindParam(':user_nama', $user_nama);
         $stmt->bindParam(':user_status', $user_status);
 
-        return $stmt->execute();
+        $stmt->execute();
+        return $stmt;
         
     }
 
