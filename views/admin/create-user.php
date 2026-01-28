@@ -28,7 +28,7 @@ include_once '../tamplate/navbar-admin.php';
 </head>
 <body>
     <div class="container bg-body-secondary mt-5 rounded py-4">
-        <form action="">
+        <form action="../../controller/create-user.php">
             <h1 class="h1 text-center">Tambah User</h1>
             <div class="mb3">
                 <label for="" class="form-label">Username</label>
@@ -46,6 +46,15 @@ include_once '../tamplate/navbar-admin.php';
                 <label for="" class="form-label">User Nama</label>
                 <input type="text" name="user_nama" class="form-control">
             </div>
+            <div class="mb-3">
+                <label for="" class="form-label">Status</label>
+                <select name="" aria-label="Default select example" id="" class="form-select">
+                    <option selected>Pilih Status</option>
+                    <option value="1">Admin</option>
+                    <option value="2">Kasir</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" type="submit">Submit</button>
         </form>
     </div>
 </body>
