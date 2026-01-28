@@ -31,7 +31,7 @@ include_once "../tamplate/navbar-admin.php";
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3>Data User</h3>
-        <a href="tambah.php" class="btn btn-primary btn-sm">+ Tambah User</a>
+        <a href="create-user.php" class="btn btn-primary btn-sm">+ Tambah User</a>
     </div>
 
 
