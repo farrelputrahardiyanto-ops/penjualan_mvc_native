@@ -52,7 +52,8 @@ class User{
         try {
             $sql = "SELECT * FROM {$this->table}";
             $stmt = $this->conn->prepare($sql);
-            return $stmt->execute();
+            $stmt->execute();
+            return $stmt;
 
 
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

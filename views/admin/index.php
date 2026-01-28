@@ -8,7 +8,11 @@ require_once __DIR__ . '/../../models/user.php';
 $db = new Database;
 $userModel = new User($db->conn);
 
-$data = $userModel->Read();
+$stmt = $userModel->Read();
+$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+include_once "../tamplate/navbar-admin.php";
 
 ?>
 
@@ -43,13 +47,18 @@ $data = $userModel->Read();
                 </tr>
             </thead>
             <tbody>
-                    <?php $no = 1; ?>
+                    <?php $no = 1;  foreach ($data as $row): ?>
                     
-                    <?php while ($row = $data->fetch(PDO::FETCH_ASSOC)): ?>
+                    <?php  ?>
                         <tr>
                             <td class="text-center"><?= $no++ ?></td>
                             <td><?= htmlspecialchars($row['username']) ?></td>
-                            <td><?= htmlspecialchars($u['user_nama']) ?></td>
+                            <td><?= htmlspecialchars($row['user_nama']) ?></td>
+                            <td><?php if($row['user_status'] == 1){
+                                $status = "Admin";
+                                 }elseif($row['user_status'] == 2){
+                                    $status = "Kasir";
+                                    }    echo $status;?></td>
                             
                             <td class="text-center">
                                 <a href="edit.php?username=<?= $row['user_id'] ?>" class="btn btn-warning btn-sm">
@@ -62,7 +71,7 @@ $data = $userModel->Read();
                                 </a>
                             </td>
                         </tr>
-                    <?php endwhile; ?>
+                    <?php  endforeach;  ?>
             </tbody>
         </table>
     </div>

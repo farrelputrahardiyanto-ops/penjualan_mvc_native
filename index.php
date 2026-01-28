@@ -23,7 +23,6 @@
     </form>
     </div>
 
-    <?php  var_dump($this->conn); ?>
 
   
     
