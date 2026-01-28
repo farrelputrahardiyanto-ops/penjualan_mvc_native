@@ -35,7 +35,7 @@ class User{
 
     //create
     public function Create($username, $password, $user_nama, $user_status){
-        $sql = "INSERT INTO {$this->table} VALUES (NULL, :username, :passwor, :user_nama, :user_status)";
+        $sql = "INSERT INTO {$this->table} VALUES (NULL, :username, :password, :user_nama, :user_status)";
         $stmt = $this->conn->prepare($sql);
         
         $stmt->bindParam(':username', $username);
@@ -43,7 +43,9 @@ class User{
         $stmt->bindParam(':user_nama', $user_nama);
         $stmt->bindParam(':user_status', $user_status);
 
-        return $stmt->execute();
+        $stmt->execute();
+
+        return $stmt;
         
     }
 
