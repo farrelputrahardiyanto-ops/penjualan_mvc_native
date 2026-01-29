@@ -34,7 +34,7 @@ class Barang{
 
     //update
     public function Update($id, $nama_barang, $harga_beli, $harga_jual, $stok){
-        $query = "UPDATE {$this->table} harga_beli = :harga_beli,
+        $query = "UPDATE {$this->table} SET harga_beli = :harga_beli,
                                         harga_jual = :harga_jual,
                                         stok = :stok 
                                         WHERE id_barang = :id";
@@ -45,7 +45,9 @@ class Barang{
         $stmt->bindParam("harga_jual", $harga_jual);
         $stmt->bindParam("stok", $stok);
 
-        return $stmt->execute();
+        $stmt->execute();
+
+        return $stmt;
         
         
     }
@@ -55,9 +57,21 @@ class Barang{
     //read
     public function Read(){
         $query = "SELECT * FROM {$this->table}";
-        $stmt = $this->conn->prepare();
+        $stmt = $this->conn->prepare($query);
 
-        return $stmt->execute();
+        $stmt->execute();
+        return $stmt;
+    }
+
+    //read by id
+    public function ReadById($id){
+        $query = "SELECT * FROM {$this->table} WHERE id_barang = :id";
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(":id", $id);
+
+        $stmt->execute();
+        return $stmt;
     }
 
 
@@ -69,7 +83,9 @@ class Barang{
 
         $stmt->bindParam("id", $id);
 
-        return $stmt->execute;
+        $stmt->execute();
+
+        return $stmt;
 
     }
 

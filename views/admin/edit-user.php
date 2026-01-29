@@ -63,9 +63,8 @@ include_once '../tamplate/navbar-admin.php';
             <div class="mb-3">
                 <label for="" class="form-label">Status</label>
                 <select name="status" aria-label="Default select example" id="" class="form-select">
-                    <option selected></option>
-                    <option value="1">Admin</option>
-                    <option value="2">Kasir</option>
+                    <option value="1" <?php if ($row['user_status'] == 1) echo "selected"; ?>>Admin</option>
+                    <option value="2" <?php if ($row['user_status'] == 2) echo "selected"; ?>>Kasir</option>
                 </select>
             </div>
             <button class="btn btn-primary" type="submit" name="submit">Submit</button>
