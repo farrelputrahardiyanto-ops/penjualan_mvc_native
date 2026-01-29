@@ -64,7 +64,7 @@ include_once "../tamplate/navbar-admin.php";
                                 <a href="edit-user.php?user_id=<?= $row['user_id'] ?>" class="btn btn-warning btn-sm">
                                     Edit
                                 </a>
-                                <a href="delete.php?user_id=<?= $row['user_id'] ?>"
+                                <a href="../../controller/delete-user.php?user_id=<?= $row['user_id'] ?>"
                                    class="btn btn-danger btn-sm"
                                    onclick="return confirm('Yakin mau hapus user ini?')">
                                     Delete
