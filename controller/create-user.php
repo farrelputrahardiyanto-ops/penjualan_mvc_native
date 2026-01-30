@@ -14,5 +14,7 @@ if(isset($_POST['submit'])){
         $user_status = $_POST['status'];
 
         $user = $userModel->Create($username, $password, $user_nama, $user_status);
+
+        header("location: ../../view/admin/index.php");
     }
 }
