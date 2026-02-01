@@ -3,21 +3,32 @@
 session_start();
 
 require_once __DIR__ . '/../../config/database.php';
-require_once __DIR__ . '/../../models/user.php';
-
+require_once __DIR__ . '/../../models/penjualan.php';
 
 
 $db = new Database;
-$userModel = new User($db->conn);
+$penjualanModel = new Penjualan($db->conn);
 
-$stmt = $userModel->Read();
+
+$stmt = $penjualanModel->Read();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-include_once "../tamplate/navbar-admin.php";
+$user = $_SESSION['user'];
+
+if(!$user){
+    // belum login
+    header("Location: ../../index.php");
+    exit;
+}
+
+if($user['user_status'] == 1){
+    require_once "../tamplate/navbar-admin.php";
+}elseif($user['user_status'] == 2){
+    require_once "../tamplate/navbar-kasir.php";
+}
 
 ?>
-
 
 
 
@@ -33,7 +44,7 @@ include_once "../tamplate/navbar-admin.php";
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3>Data User</h3>
-        <a href="create-user.php" class="btn btn-primary btn-sm">+ Tambah User</a>
+        <a href="create-barang.php" class="btn btn-primary btn-sm">+ Tambah User</a>
     </div>
 
 
@@ -42,9 +53,10 @@ include_once "../tamplate/navbar-admin.php";
             <thead class="table-dark text-center">
                 <tr>
                     <th>No</th>
-                    <th>Username</th>
-                    <th>Nama</th>
-                    <th>Status</th>
+                    <th>ID Barang</th>
+                    <th>Tgl Jual</th>
+                    <th>Total Harga</th>
+                    <th>User ID</th>
                     <th width="150">Aksi</th>
                 </tr>
             </thead>
@@ -54,23 +66,20 @@ include_once "../tamplate/navbar-admin.php";
                     <?php  ?>
                         <tr>
                             <td class="text-center"><?= $no++ ?></td>
-                            <td><?= htmlspecialchars($row['username']) ?></td>
-                            <td><?= htmlspecialchars($row['user_nama']) ?></td>
-                            <td><?php if($row['user_status'] == 1){
-                                $status = "Admin";
-                                 }elseif($row['user_status'] == 2){
-                                    $status = "Kasir";
-                                    }    echo $status;?></td>
+                            <td><?= htmlspecialchars($row['id_barang']) ?></td>
+                            <td><?= htmlspecialchars($row['tgl_jual']) ?></td>
+                            <td><?= htmlspecialchars($row['total_harga']) ?></td>
+                            <td><?= htmlspecialchars($row['user_id']) ?></td>
                             
                             <td class="text-center d-flex">
-                                <form action="edit-user.php" method="post" >
-                                     <input type="hidden" name="user_id" value="<?= $row['user_id'] ?>">
+                                <form action="edit-barang.php" method="post" >
+                                     <input type="hidden" name="id_penjualan" value="<?= $row['id_penjualan'] ?>">
                                       <button type="submit" class="btn btn-warning btn-sm mx-1" name="delete">
                                              Edit
                                     </button>
                                 </form>
-                                <form action="../../controller/user.php" method="POST">
-                                    <input type="hidden" name="user_id" value="<?= $row['user_id'] ?>">
+                                <form action="../../controller/barang.php" method="POST">
+                                    <input type="hidden" name="id_penjualan" value="<?= $row['id_penjualan'] ?>">
                                      <button type="submit" class="btn btn-danger btn-sm mx-1" name="delete" onclick="return confirm('Yakin hapus?')">
                                              Delete
                                     </button>

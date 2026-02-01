@@ -21,12 +21,6 @@ $user = $_SESSION['user'];
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a href="../admin/index.php" class="nav-link">User</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="../admin/barang.php" class="nav-link">Barang</a>
-                    </li>
-                    <li class="nav-item">
                         <a href="../penjualan/penjualan.php" class="nav-link">Penjualan</a>
                     </li>
                 </ul>

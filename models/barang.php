@@ -89,4 +89,14 @@ class Barang{
 
     }
 
+    public function KurangiStok($id_barang, $qty)
+        {
+    $sql = "UPDATE barang SET stok = stok - :qty WHERE id_barang = :id";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bindParam(':qty', $qty);
+    $stmt->bindParam(':id', $id_barang);
+    $stmt->execute();
+    return $stmt;
+    }
+
 }
