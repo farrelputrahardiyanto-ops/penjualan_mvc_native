@@ -28,7 +28,7 @@ include_once '../tamplate/navbar-admin.php';
 </head>
 <body>
     <div class="container bg-body-secondary mt-5 rounded py-4">
-        <form action="../../controller/create-barang.php" method="post">
+        <form action="../../controller/barang.php" method="post">
             <h1 class="h1 text-center">Tambah Barang</h1>
             <div class="mb3">
                 <label for="" class="form-label">Nama Barang</label>
@@ -47,7 +47,7 @@ include_once '../tamplate/navbar-admin.php';
                 <input type="number" name="stok" class="form-control">
             </div>
         
-            <button class="btn btn-primary" type="submit" name="submit">Submit</button>
+            <button class="btn btn-primary" type="submit" name="create">Submit</button>
         </form>
     </div>
 </body>

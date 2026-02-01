@@ -58,15 +58,20 @@ include_once "../tamplate/navbar-admin.php";
                             <td><?= htmlspecialchars($row['harga_jual']) ?></td>
                             <td><?= htmlspecialchars($row['stok']) ?></td>
                             
-                            <td class="text-center">
-                                <a href="edit-barang.php?id=<?= $row['id_barang'] ?>" class="btn btn-warning btn-sm">
-                                    Edit
-                                </a>
-                                <a href="../../controller/delete-barang.php?id=<?= $row['id_barang'] ?>"
-                                   class="btn btn-danger btn-sm"
-                                   onclick="return confirm('Yakin mau hapus user ini?')">
-                                    Delete
-                                </a>
+                            <td class="text-center d-flex">
+                                <form action="edit-barang.php" method="post" >
+                                     <input type="hidden" name="id_barang" value="<?= $row['id_barang'] ?>">
+                                      <button type="submit" class="btn btn-warning btn-sm mx-1" name="delete">
+                                             Edit
+                                    </button>
+                                </form>
+                                <form action="../../controller/barang.php" method="POST">
+                                    <input type="hidden" name="id_barang" value="<?= $row['id_barang'] ?>">
+                                     <button type="submit" class="btn btn-danger btn-sm mx-1" name="delete" onclick="return confirm('Yakin hapus?')">
+                                             Delete
+                                    </button>
+                                </form>
+
                             </td>
                         </tr>
                     <?php  endforeach;  ?>

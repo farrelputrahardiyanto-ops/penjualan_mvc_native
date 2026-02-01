@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../models/barang.php';
 $db = new Database;
 $barangModel = new Barang($db->conn);
 
-$id = $_GET['id'];
+$id = $_POST['id_barang'];
 
 $read = $barangModel->ReadById($id);
 $data = $read->fetchAll(PDO::FETCH_ASSOC);
@@ -40,7 +40,7 @@ include_once '../tamplate/navbar-admin.php';
 <body>
     <?php  foreach($data as $row): ?>
     <div class="container bg-body-secondary mt-5 rounded py-4">
-        <form action="../../controller/update-barang.php" method="post">
+        <form action="../../controller/barang.php" method="post">
                 <input type="hidden" name="id_barang" value="<?= $row['id_barang'] ?>">
 
             <h1 class="h1 text-center">Edit User</h1>
@@ -60,7 +60,7 @@ include_once '../tamplate/navbar-admin.php';
                 <label for="" class="form-label">Stok</label>
                 <input type="number" name="stok" class="form-control" value="<?=  $row['stok'] ?>">
             </div>
-            <button class="btn btn-primary" type="submit" name="submit">Submit</button>
+            <button class="btn btn-primary" type="submit" name="update">Submit</button>
         </form>
     </div>
 

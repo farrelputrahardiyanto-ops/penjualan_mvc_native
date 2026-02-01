@@ -107,6 +107,23 @@ class User{
         
     }
 
+    //update without new password
+    public function UpdateWithoutNewPassword($id, $username,$user_nama, $user_status){
+         $sql = "UPDATE {$this->table} SET   username = :username,
+                                            user_nama = :user_nama,
+                                            user_status = :user_status  WHERE user_id = :id";
+        $stmt = $this->conn->prepare($sql);
+
+
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':user_nama', $user_nama);
+        $stmt->bindParam(':user_status', $user_status);
+
+        $stmt->execute();
+        return $stmt;
+    }
+
     //delete
     public function Delete($id){
         $sql = "DELETE FROM {$this->table} WHERE :id = user_id";

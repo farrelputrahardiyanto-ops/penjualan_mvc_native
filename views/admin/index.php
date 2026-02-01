@@ -60,15 +60,20 @@ include_once "../tamplate/navbar-admin.php";
                                     $status = "Kasir";
                                     }    echo $status;?></td>
                             
-                            <td class="text-center">
-                                <a href="edit-user.php?user_id=<?= $row['user_id'] ?>" class="btn btn-warning btn-sm">
-                                    Edit
-                                </a>
-                                <a href="../../controller/delete-user.php?user_id=<?= $row['user_id'] ?>"
-                                   class="btn btn-danger btn-sm"
-                                   onclick="return confirm('Yakin mau hapus user ini?')">
-                                    Delete
-                                </a>
+                            <td class="text-center d-flex">
+                                <form action="edit-user.php" method="post" >
+                                     <input type="hidden" name="user_id" value="<?= $row['user_id'] ?>">
+                                      <button type="submit" class="btn btn-warning btn-sm mx-1" name="delete">
+                                             Edit
+                                    </button>
+                                </form>
+                                <form action="../../controller/user.php" method="POST">
+                                    <input type="hidden" name="user_id" value="<?= $row['user_id'] ?>">
+                                     <button type="submit" class="btn btn-danger btn-sm mx-1" name="delete" onclick="return confirm('Yakin hapus?')">
+                                             Delete
+                                    </button>
+                                </form>
+
                             </td>
                         </tr>
                     <?php  endforeach;  ?>

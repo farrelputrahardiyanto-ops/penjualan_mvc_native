@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../models/user.php';
 $db = new Database;
 $userModel = new User($db->conn);
 
-$id = $_GET['user_id'];
+$id = $_POST['user_id'];
 
 $read = $userModel->ReadById($id);
 $data = $read->fetchAll(PDO::FETCH_ASSOC);
@@ -40,7 +40,7 @@ include_once '../tamplate/navbar-admin.php';
 <body>
     <?php  foreach($data as $row): ?>
     <div class="container bg-body-secondary mt-5 rounded py-4">
-        <form action="../../controller/update-user.php" method="post">
+        <form action="../../controller/user.php" method="post">
                 <input type="hidden" name="user_id" value="<?= $row['user_id'] ?>">
 
             <h1 class="h1 text-center">Edit User</h1>
@@ -67,7 +67,7 @@ include_once '../tamplate/navbar-admin.php';
                     <option value="2" <?php if ($row['user_status'] == 2) echo "selected"; ?>>Kasir</option>
                 </select>
             </div>
-            <button class="btn btn-primary" type="submit" name="submit">Submit</button>
+            <button class="btn btn-primary" type="submit" name="update">Submit</button>
         </form>
     </div>
 
