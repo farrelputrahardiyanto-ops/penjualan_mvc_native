@@ -24,7 +24,7 @@ $user = $_SESSION['user'];
                 <ul class="navbar-nav">
                   
                  <li class="nav-item">
-                        <a href="../penjualan/penjualan.php" class="dropdown-item"><i class="bi bi-receipt"></i>Penjualan</a>
+                        <a href="../penjualan/riwayat_penjualan.php" class="nav-link"><i class="bi bi-receipt"></i>Penjualan</a>
                     </li>
                 </ul>
 
@@ -33,7 +33,7 @@ $user = $_SESSION['user'];
                     <li class="nav-item"><span class="nav-link active">
                         Hallo,<?php echo $user['username']; ?>
                     </span></li>
-                     
+                     <li class="nav-item"><a href="../../controller/logout.php" class="nav-link" onclick= "return confirm('Yakin ingin Logout?');"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
 
                 </ul>
             </div>

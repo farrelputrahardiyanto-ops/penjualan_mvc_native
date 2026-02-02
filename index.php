@@ -8,8 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container rounded bg-body-secondary py-4 px-5 my-5">
-        <form action="controller/login.php" method="post" class="form">
+    <div class="container rounded bg-body-secondary py-4 px-5 mt-5 w-25">
+        <form action="controller/login.php" method="post" class="form d-flex flex-column">
             <h2 class="h2 text-center">Login</h2>
         <div class="mb-3 ">
             <label for="" class="form-label">Username</label>
