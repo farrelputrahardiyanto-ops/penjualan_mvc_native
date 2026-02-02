@@ -1,20 +1,17 @@
 <?php
-
 session_start();
 
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../models/penjualan.php';
-
+require_once __DIR__ . '/../../models/detail_penjualan.php';
 
 $db = new Database;
 $penjualanModel = new Penjualan($db->conn);
+$detailModel    = new DetailPenjualan($db->conn);
 
+// ================= AUTH =================
+$user = $_SESSION['user'] ;
 
-$stmt = $penjualanModel->Read();
-$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
-$user = $_SESSION['user'];
 
 if(!$user){
     // belum login
@@ -28,70 +25,79 @@ if($user['user_status'] == 1){
     require_once "../tamplate/navbar-kasir.php";
 }
 
+// ================= GET ID =================
+if (!isset($_GET['id'])) {
+    echo "ID penjualan tidak ditemukan";
+    exit;
+}
+
+$id_penjualan = $_GET['id'];
+
+
+// ================= DATA =================
+$penjualan = $penjualanModel->FindById($id_penjualan);
+$data      = $detailModel->ReadByPenjualan($id_penjualan);
 ?>
 
-
-
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <title>Data User</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-
 <div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3>Data User</h3>
-        <a href="create-barang.php" class="btn btn-primary btn-sm">+ Tambah User</a>
-    </div>
+    <h4>Detail Penjualan</h4>
 
+    <p>
+        <strong>Tanggal:</strong> <?= $penjualan['tgl_jual'] ?><br>
+        <strong>Total:</strong> Rp <?= number_format($penjualan['total_harga']) ?>
+    </p>
 
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped align-middle">
-            <thead class="table-dark text-center">
-                <tr>
-                    <th>No</th>
-                    <th>ID Barang</th>
-                    <th>Tgl Jual</th>
-                    <th>Total Harga</th>
-                    <th>User ID</th>
-                    <th width="150">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                    <?php $no = 1;  foreach ($data as $row): ?>
-                    
-                    <?php  ?>
-                        <tr>
-                            <td class="text-center"><?= $no++ ?></td>
-                            <td><?= htmlspecialchars($row['id_barang']) ?></td>
-                            <td><?= htmlspecialchars($row['tgl_jual']) ?></td>
-                            <td><?= htmlspecialchars($row['total_harga']) ?></td>
-                            <td><?= htmlspecialchars($row['user_id']) ?></td>
-                            
-                            <td class="text-center d-flex">
-                                <form action="edit-barang.php" method="post" >
-                                     <input type="hidden" name="id_penjualan" value="<?= $row['id_penjualan'] ?>">
-                                      <button type="submit" class="btn btn-warning btn-sm mx-1" name="delete">
-                                             Edit
-                                    </button>
-                                </form>
-                                <form action="../../controller/barang.php" method="POST">
-                                    <input type="hidden" name="id_penjualan" value="<?= $row['id_penjualan'] ?>">
-                                     <button type="submit" class="btn btn-danger btn-sm mx-1" name="delete" onclick="return confirm('Yakin hapus?')">
-                                             Delete
-                                    </button>
-                                </form>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th>No</th>
+            <th>Barang</th>
+            <th>Qty</th>
+            <th>Harga</th>
+            <th>Subtotal</th>
+            <th>Aksi</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php if (empty($data)): ?>
+            <tr>
+                <td colspan="6" class="text-center">Tidak ada data</td>
+            </tr>
+        <?php endif; ?>
 
-                            </td>
-                        </tr>
-                    <?php  endforeach;  ?>
-            </tbody>
-        </table>
-    </div>
+        <?php $no = 1; foreach ($data as $row): ?>
+        <tr>
+            <td><?= $no++ ?></td>
+            <td><?= $row['nama_barang'] ?></td>
+            <td>
+                <form action="../../controller/penjualan.php" method="post" class="d-flex gap-1">
+                    <input type="hidden" name="id_detail" value="<?= $row['id_detail'] ?>">
+                    <input type="hidden" name="id_penjualan" value="<?= $row['id_penjualan'] ?>">
+                    <input type="number" name="qty" value="<?= $row['qty'] ?>"
+                           min="1" class="form-control form-control-sm" style="width:70px">
+                    <button type="submit" name="update_detail"
+                            class="btn btn-warning btn-sm">
+                        Update
+                    </button>
+                </form>
+            </td>
+            <td>Rp <?= number_format($row['harga_jual']) ?></td>
+            <td>Rp <?= number_format($row['subtotal']) ?></td>
+            <td>
+                <form action="../../controller/penjualan.php" method="post"
+                      onsubmit="return confirm('Hapus item ini?')">
+                    <input type="hidden" name="id_detail" value="<?= $row['id_detail'] ?>">
+                    <input type="hidden" name="id_penjualan" value="<?= $row['id_penjualan'] ?>">
+                    <button type="submit" name="delete_detail"
+                            class="btn btn-danger btn-sm">
+                        Hapus
+                    </button>
+                </form>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+
+    <a href="riwayat_penjualan.php" class="btn btn-primary center">Selesai</a>
 </div>
-
-</body>
-</html>

@@ -8,6 +8,8 @@ $user = $_SESSION['user'];
 ?>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
 
 
@@ -20,8 +22,9 @@ $user = $_SESSION['user'];
             </button>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a href="../penjualan/penjualan.php" class="nav-link"><i class="bi bi-receipt">Penjualan</a>
+                  
+                 <li class="nav-item">
+                        <a href="../penjualan/penjualan.php" class="dropdown-item"><i class="bi bi-receipt"></i>Penjualan</a>
                     </li>
                 </ul>
 
