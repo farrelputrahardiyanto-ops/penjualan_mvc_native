@@ -33,7 +33,7 @@ include_once "../tamplate/navbar-admin.php";
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3>Data User</h3>
-        <a href="create-barang.php" class="btn btn-primary btn-sm">+ Tambah User</a>
+        <a href="create-barang.php" class="btn btn-primary btn-sm">+ Tambah Barang</a>
     </div>
 
 
@@ -56,8 +56,8 @@ include_once "../tamplate/navbar-admin.php";
                         <tr>
                             <td class="text-center"><?= $no++ ?></td>
                             <td><?= htmlspecialchars($row['nama_barang']) ?></td>
-                            <td><?= htmlspecialchars($row['harga_beli']) ?></td>
-                            <td><?= htmlspecialchars($row['harga_jual']) ?></td>
+                            <td>Rp <?= htmlspecialchars( number_format($row['harga_beli']) ) ?></td>
+                            <td>Rp <?= htmlspecialchars( number_format($row['harga_jual']) ) ?></td>
                             <td><?= htmlspecialchars($row['stok']) ?></td>
                             
                             <td class="text-center d-flex">
