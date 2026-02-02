@@ -71,4 +71,23 @@ class DetailPenjualan {
 
         return $stmt->fetch(PDO::FETCH_ASSOC)['total'] ?? 0;
     }
+
+    public function GetByPenjualan($id_penjualan)
+{
+    $sql = "SELECT 
+                dp.id_detail,
+                b.nama_barang,
+                dp.qty,
+                dp.harga_jual,
+                dp.subtotal
+            FROM detail_penjualan dp
+            JOIN barang b ON dp.id_barang = b.id_barang
+            WHERE dp.id_penjualan = :id";
+
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bindParam(':id', $id_penjualan);
+    $stmt->execute();
+    return $stmt;
+}
+
 }

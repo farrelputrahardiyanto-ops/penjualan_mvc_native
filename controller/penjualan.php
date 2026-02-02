@@ -71,7 +71,7 @@ if (isset($_POST['update_penjualan'])) {
         $_POST['tgl_jual']
     );
 
-    header("Location: ../views/penjualan/riwayat.php");
+    header("Location: ../views/penjualan/riwayat_penjualan.php");
 }
 
 // DELETE PENJUALAN + DETAIL
