@@ -25,14 +25,14 @@ include_once "../tamplate/navbar-admin.php";
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Data User</title>
+    <title>Data Barang</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3>Data User</h3>
+        <h3>Data Barang</h3>
         <a href="create-barang.php" class="btn btn-primary btn-sm">+ Tambah Barang</a>
     </div>
 

@@ -18,7 +18,7 @@ if($user){
     $_SESSION['user'] = $user;
 
     if($user['user_status'] == 1){
-        header("Location: ../views/admin/index.php");
+        header("Location: ../views/penjualan/index.php");
     }elseif($user['user_status'] == 2){
         header("Location: ../views/penjualan/index.php");
     }

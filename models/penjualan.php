@@ -104,4 +104,31 @@ public function Delete($id)
     $stmt->execute();
 }
 
+public function ReadRiwayatByTanggal($dari, $sampai)
+{
+    $sql = "SELECT 
+                p.id_penjualan,
+                p.tgl_jual,
+                p.total_harga,
+                u.user_nama,
+                GROUP_CONCAT(
+                    CONCAT(b.nama_barang, ' (', dp.qty, ')')
+                    SEPARATOR ', '
+                ) AS barang
+            FROM penjualan p
+            JOIN user u ON p.user_id = u.user_id
+            JOIN detail_penjualan dp ON p.id_penjualan = dp.id_penjualan
+            JOIN barang b ON dp.id_barang = b.id_barang
+            WHERE p.tgl_jual BETWEEN :dari AND :sampai
+            GROUP BY p.id_penjualan
+            ORDER BY p.tgl_jual ASC";
+
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bindParam(':dari', $dari);
+    $stmt->bindParam(':sampai', $sampai);
+    $stmt->execute();
+    return $stmt;
+}
+
+
 }
