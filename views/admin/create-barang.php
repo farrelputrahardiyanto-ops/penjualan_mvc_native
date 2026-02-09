@@ -48,8 +48,13 @@ include_once '../tamplate/navbar-admin.php';
                 <label for="" class="form-label">Stok</label>
                 <input type="number" name="stok" class="form-control">
             </div>
-        
-            <button class="btn btn-primary" type="submit" name="create">Submit</button>
+            <div class="d-flex justify-content-between mt-4 px-3">
+                 <button class="btn btn-primary " type="submit" name="create">Submit</button>
+                 <a  href="barang.php"  class="btn btn-secondary">
+        ← Kembali
+        </a>
+            </div>
+           
         </form>
     </div>
 </body>

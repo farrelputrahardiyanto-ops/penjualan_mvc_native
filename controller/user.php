@@ -18,8 +18,8 @@ if(isset($_POST['create'])){
 
         header("location: ../views/admin/index.php");
     }
-   } catch (\Throwable $th) {
-    //throw $th;
+   } catch (Exception $e) {
+    echo $e->getMessage();
    }
 }elseif(isset($_POST['update'])){
     try {
@@ -41,9 +41,9 @@ if(isset($_POST['create'])){
     }
     header("location: ../views/admin/index.php");
 
-    } catch (\Throwable $th) {
-        //throw $th;
-    }
+    } catch (Exception $e) {
+    echo $e->getMessage();
+   }
 }elseif(isset($_POST['delete'])){
     try {
         
@@ -52,7 +52,7 @@ if(isset($_POST['create'])){
             $user = $userModel->Delete($id);
             header("location: ../views/admin/index.php");
         
-    } catch (\Throwable $th) {
-        //throw $th;
-    }
+    } catch (Exception $e) {
+    echo $e->getMessage();
+   }
 }

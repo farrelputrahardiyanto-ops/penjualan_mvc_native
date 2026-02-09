@@ -18,9 +18,9 @@ if(isset($_POST['create'])){
     $barang = $barangModel->Create($nama_barang, $harga_beli, $harga_jual, $stok);
 
     header("location: ../views/admin/barang.php");
-    } catch (\Throwable $th) {
-        //throw $th;
-    }
+    } catch (Exception $e) {
+    echo $e->getMessage();
+   }
  
 }elseif(isset($_POST['update'])){
     try {
@@ -33,10 +33,9 @@ if(isset($_POST['create'])){
     $barang = $barangModel->Update($id, $nama_barang, $harga_beli, $harga_jual, $stok);
 
     header("location: ../views/admin/barang.php");
-    } catch (\Throwable $th) {
-        //throw $th;
-    }
-
+    }catch (Exception $e) {
+    echo $e->getMessage();
+   }
    
 
 }elseif(isset($_POST['delete'])){
@@ -46,7 +45,7 @@ if(isset($_POST['create'])){
         $barang = $barangModel->Delete($id);
 
         header("location: ../views/admin/barang.php");
-    } catch (\Throwable $th) {
-        //throw $th;
-    }
+    } catch (Exception $e) {
+    echo $e->getMessage();
+   }
 }

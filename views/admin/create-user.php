@@ -56,7 +56,12 @@ include_once '../tamplate/navbar-admin.php';
                     <option value="2">Kasir</option>
                 </select>
             </div>
-            <button class="btn btn-primary" type="submit" name="create">Submit</button>
+            <div class="d-flex justify-content-between mt-4 px-3">
+                 <button class="btn btn-primary " type="submit" name="create">Submit</button>
+                 <a  href="user.php"  class="btn btn-secondary">
+        ← Kembali
+        </a>
+            </div>
         </form>
     </div>
 </body>

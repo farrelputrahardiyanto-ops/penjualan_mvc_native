@@ -69,7 +69,12 @@ include_once '../tamplate/navbar-admin.php';
                     <option value="2" <?php if ($row['user_status'] == 2) echo "selected"; ?>>Kasir</option>
                 </select>
             </div>
-            <button class="btn btn-primary" type="submit" name="update">Submit</button>
+            <div class="d-flex justify-content-between mt-4 px-3">
+                 <button class="btn btn-primary " type="submit" name="update">Submit</button>
+                 <a  href="barang.php"  class="btn btn-secondary">
+        ← Kembali
+        </a>
+            </div>
         </form>
     </div>
 
